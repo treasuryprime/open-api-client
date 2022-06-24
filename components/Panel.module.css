@@ -1,0 +1,30 @@
+.panel {
+  background: rgba(0, 0, 0, 0.02);
+  /* Gray/200 */
+
+  border: 1px solid #EEEEEE;
+  border-radius: 6px;
+}
+
+.panel:not(:last-child) {
+  margin-bottom: 24px;
+}
+
+.title {
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.02);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  /* identical to box height, or 20px */
+
+  letter-spacing: -0.02em;
+  font-feature-settings: 'tnum' on, 'lnum' on, 'ss03' on;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+.content {
+  padding: 0 16px;
+  overflow-x: auto;
+}

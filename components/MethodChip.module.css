@@ -1,0 +1,37 @@
+.chip {
+  font-family: 'GT America Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 140%;
+  /* identical to box height, or 17px */
+
+  font-feature-settings: 'tnum' on, 'lnum' on, 'ss03' on;
+
+  /* White */
+
+  color: #FFFFFF;
+  border-radius: 3px;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 1px 4px;
+  gap: 8px;
+
+}
+
+.post {
+  background: rgba(6, 69, 173, 1);
+}
+
+.get {
+  background: rgba(105, 170, 102, 1);
+}
+
+.put {
+  background: rgb(173, 6, 6);
+}
+
+.patch {
+  background: rgb(173, 134, 6);
+}

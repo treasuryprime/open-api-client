@@ -1,0 +1,195 @@
+# {props.data.description}
+<SplitSection>
+  <Left>{props.data.description}</Left>
+  <Right>
+    <Panel title="Endpoints" padding="4px 16px">
+      {props.data.post && <EndpointMethod showArrow method="post" route={props.path} />}
+      {props.data.get && <EndpointMethod showArrow method="get" route={props.path} />}
+      {props.data.put && <EndpointMethod showArrow method="put" route={props.path} />}
+      {props.data.patch && <EndpointMethod showArrow method="patch" route={props.path} />}
+    </Panel>
+  </Right>
+</SplitSection>
+***
+## The Account Object
+<SplitSection>
+  <Left>
+    ##### Attributes
+    ***
+    <Parameter name="account_id" type="string" filterable required>Bank account number.</Parameter>
+    ***
+    <Parameter name="account_product_id" type="string">Either checking or savings. Non-DDA accounts are currently not supported.</Parameter>
+    ***
+    <Parameter name="address" type="string">Address on file associated with the bank account.</Parameter>
+    ***
+    <Parameter name="available_balance" type="string">Available funds in this account. If not available, the value will be null.</Parameter>
+    ***
+    <Parameter name="business_ids" type="array[string]">Array of IDs of Business objects representing all businesses that own this account. Always empty for personal accounts.</Parameter>
+    ***
+    <Parameter name="created_at" type="string">Timestamp of when the object was created.</Parameter>
+    ***
+    <Parameter name="currency" type="string">Three-letter ISO currency code in lowercase, indicating the currency denominating the account. Currently only USD is supported.</Parameter>
+    ***
+    <Parameter name="current_balance" type="string">Last known account balance, with two-decimal precision. Note that some accounts may not support this field— if not available, the value will be null.</Parameter>
+  </Left>
+  <Right>
+    <Panel title="Account Object Attributes">
+      ```
+      {
+        "account_id": null,
+        "account_product_id": "apt_11gq3k2s68rnvx",
+        "bankdata": null,
+        "primary_person_application_id": "apsn_11gjtp4m30qgwc",
+        "business_application_id": null,
+        "updated_at": "2021-11-22T10:12:22Z",
+        "product": null,
+        "status": "submitted",
+        "account_number": null,
+        "id": "aact_11gspv866y8a89",
+        "deposit_id": "adpt_11gjtpad30qh7g",
+        "ownership_type": "personal",
+        "person_applications": [
+          {
+            "id": "apsn_11gjtp4m30qgwc",
+            "roles": [
+              "owner",
+              "signer"
+            ]
+          }
+        ],
+        "account_number_reservation_id": null,
+        "created_at": "2021-11-22T10:12:22Z",
+        "userdata": null
+      }
+      ```
+    </Panel>
+  </Right>
+</SplitSection>
+***
+## Create Account Application
+<EndpointMethod method="post" route="/apply/account_application" />
+<SplitSection>
+  <Left>
+    To create an application for a new bank account, create an Account Application object.
+
+    This example demonstrates the creation of a Personal account. Business accounts are very similar, but will utilize a few different fields. Please see our **account opening guide** for more information.
+
+    ##### Parameters
+    ***
+    <Parameter name="account_id" type="string" filterable required>Bank account number.</Parameter>
+    ***
+    <Parameter name="account_product_id" type="string">Either checking or savings. Non-DDA accounts are currently not supported.</Parameter>
+    ***
+    <Parameter name="address" type="string">Address on file associated with the bank account.</Parameter>
+    ***
+    <Parameter name="available_balance" type="string">Available funds in this account. If not available, the value will be null.</Parameter>
+    ***
+    <Parameter name="business_ids" type="array[string]">Array of IDs of Business objects representing all businesses that own this account. Always empty for personal accounts.</Parameter>
+  </Left>
+  <Right>
+    <Panel title="Post Request">
+      ```
+      curl https://api.treasuryprime.com/apply/account_application \
+        -u $API_KEY_ID:$API_KEY_VALUE
+        -H 'Content-Type: application/json' \
+        -d '{
+              "deposit_id": "adpt_01d5w6xx0tvs",
+              "person_applications": [
+                {
+                  "id": "apsn_01d5w6yaa6vt",
+                  "roles": ["owner", "signer"]
+                }
+              ],
+              "primary_person_application_id": "apsn_01d5w6yaa6vt",
+              "account_product_id": "apt_11gqk87qmrax"
+            }'
+      ```
+    </Panel>
+    <Panel title="Response">
+      ```
+      {
+        "account_id": null,
+        "account_product_id": "apt_11gq3k2s68rnvx",
+        "bankdata": null,
+        "primary_person_application_id": "apsn_11gjtp4m30qgwc",
+        "business_application_id": null,
+        "updated_at": "2021-11-22T10:12:22Z",
+        "product": null,
+        "status": "submitted",
+        "account_number": null,
+        "id": "aact_11gspv866y8a89",
+        "deposit_id": "adpt_11gjtpad30qh7g",
+        "ownership_type": "personal",
+        "person_applications": [
+          {
+            "id": "apsn_11gjtp4m30qgwc",
+            "roles": ["owner", "signer"]
+          }
+        ],
+        "account_number_reservation_id": null,
+        "created_at": "2021-11-22T10:12:22Z",
+        "userdata": null
+      }
+      ```
+    </Panel>
+  </Right>
+</SplitSection>
+***
+## Retrieve All Account Applications
+<EndpointMethod method="get" route="/apply/account_application/:id" />
+<SplitSection>
+  <Left>
+    Returns a list of all existing Account Applications that have been created, or an empty list if none are available.
+
+    ##### Parameters
+    ***
+    <Parameter name=":id" type="string">Application ID</Parameter>
+  </Left>
+  <Right>
+    <Panel title="Post Request">
+      ```
+      curl https://api.treasuryprime.com/apply/account_application \
+        -u $API_KEY_ID:$API_KEY_VALUE
+        -H 'Content-Type: application/json' \
+        -d '{
+              "deposit_id": "adpt_01d5w6xx0tvs",
+              "person_applications": [
+                {
+                  "id": "apsn_01d5w6yaa6vt",
+                  "roles": ["owner", "signer"]
+                }
+              ],
+              "primary_person_application_id": "apsn_01d5w6yaa6vt",
+              "account_product_id": "apt_11gqk87qmrax"
+            }'
+      ```
+    </Panel>
+    <Panel title="Response">
+      ```
+      {
+        "account_id": null,
+        "account_product_id": "apt_11gq3k2s68rnvx",
+        "bankdata": null,
+        "primary_person_application_id": "apsn_11gjtp4m30qgwc",
+        "business_application_id": null,
+        "updated_at": "2021-11-22T10:12:22Z",
+        "product": null,
+        "status": "submitted",
+        "account_number": null,
+        "id": "aact_11gspv866y8a89",
+        "deposit_id": "adpt_11gjtpad30qh7g",
+        "ownership_type": "personal",
+        "person_applications": [
+          {
+            "id": "apsn_11gjtp4m30qgwc",
+            "roles": ["owner", "signer"]
+          }
+        ],
+        "account_number_reservation_id": null,
+        "created_at": "2021-11-22T10:12:22Z",
+        "userdata": null
+      }
+      ```
+    </Panel>
+  </Right>
+</SplitSection>

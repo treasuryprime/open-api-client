@@ -1,0 +1,41 @@
+.container {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  /* identical to box height, or 20px */
+
+  letter-spacing: -0.01em;
+  color: rgba(117, 117, 117, 1);
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 2px;
+}
+
+.name {
+  font-family: 'GT America Mono';
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%;
+  color: #000;
+  margin-right: 8px;
+}
+
+.attributes {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  display: inline-flex;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.filterable {
+  margin-left: 8px;
+}
+
+.required {
+  color: rgba(205, 109, 109, 1);
+}

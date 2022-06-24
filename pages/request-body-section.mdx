@@ -1,0 +1,3 @@
+##### Request Body
+###### {props.parameters.description}
+{Object.entries(props.parameters['content']['application/json']['schema']['properties']).map(([name, { type }]) => <ParameterDoc key={name} components={props.components} name={name} type={type} />)}

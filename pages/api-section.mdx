@@ -1,0 +1,15 @@
+# {props.data.summary || 'Lorem Ipsum Dolor Sit Amet'}
+<SplitSection>
+  <Left>{props.data.description || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultricies, nisi blandit volutpat auctor, dui erat egestas velit, non condimentum purus risus eget nisl. Vestibulum in turpis dignissim, cursus massa ac, condimentum massa. Proin tincidunt dapibus ipsum, eu egestas eros accumsan suscipit. Mauris id accumsan lectus, eget ultrices mauris. Vestibulum volutpat volutpat mi vel dictum.'}</Left>
+  <Right>
+    <Panel title="Endpoints" padding="4px 16px">
+      {props.data.get && <EndpointMethod showArrow method="get" route={props.path} />}
+      {props.data.post && <EndpointMethod showArrow method="post" route={props.path} />}
+      {props.data.put && <EndpointMethod showArrow method="put" route={props.path} />}
+      {props.data.patch && <EndpointMethod showArrow method="patch" route={props.path} />}
+    </Panel>
+  </Right>
+</SplitSection>
+{[props.data.get, props.data.post, props.data.put, props.data.patch].map((method, index) =>
+  method ? <EndpointDoc key={index} components={props.components} data={method} method={['get', 'post', 'put', 'patch'][index]} route={props.path} /> : null
+)}

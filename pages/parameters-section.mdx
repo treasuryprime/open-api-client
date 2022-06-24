@@ -1,0 +1,2 @@
+##### Parameters
+{props.parameters.map(({ name, required, schema }) => <ParameterDoc key={name} components={props.components} name={name} required={required} type={schema.type} />)}
