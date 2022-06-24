@@ -1,10 +1,10 @@
 ***
-## {props.data.summary}
+## {props.data.summary && props.data.summary() || 'Lorem Ipsum Dolor Sit'}
 <EndpointMethod method={props.method} route={props.route} />
 <SplitSection>
   <Left>
     {props.data.parameters && <ParametersSectionDoc components={props.components} parameters={props.data.parameters} />}
-    {props.data.parameters && props.data.requestBody && <br />}
+    {props.data.parameters && props.data.requestBody && <><hr /><br /></>}
     {props.data.requestBody && <RequestBodySectionDoc components={props.components} parameters={props.data.requestBody} />}
   </Left>
   <Right>

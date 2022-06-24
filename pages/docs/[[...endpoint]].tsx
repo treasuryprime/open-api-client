@@ -15,6 +15,8 @@ import ParametersSectionDoc from '../parameters-section.mdx';
 
 import styles from '../../styles/Home.module.css'
 
+import * as jsxRuntime from 'react/jsx-runtime';
+
 const DocsPage = (props: any) => {
   const components = {
     MethodChip,
@@ -35,12 +37,39 @@ const DocsPage = (props: any) => {
 
 import data from '../../public/data.json';
 import Navigation from '../../components/Navigation';
+import { compile, run } from '@mdx-js/mdx';
+import { useEffect, useState } from 'react';
+
+const convertMarkdown = async (data: Object) => {
+  const result = {} as any;
+  for (const [key, value] of Object.entries(data)) {
+    if (key === 'summary' || key === 'description') {
+      const { default: Content } = await run(await compile(value, { outputFormat: 'function-body' }), jsxRuntime);
+      result[key] = Content;
+    } else if (value !== null && typeof value === 'object') {
+      result[key] = await convertMarkdown(value);
+    } else {
+      result[key] = value;
+    }
+  };
+  return result;
+}
 
 const Page = () => {
+  const [Test, setSet] = useState({} as any);
   const router = useRouter();
   const { endpoint } = router.query;
-  const endpointDocs = Object.entries(data.paths).find((entry) => entry[0] === endpoint);
-  console.log(endpointDocs);
+  const endpointDocs = Object.keys(Test).length > 2 && Object.entries(Test.paths).find((entry) => entry[0] === endpoint);
+
+  useEffect(() => {
+    const getTest = async () => {
+      setSet(await convertMarkdown(data));
+    };
+    getTest();
+  }, [data]);
+
+  console.log(Test);
+
   return (
     <>
       <Navigation />
