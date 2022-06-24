@@ -49,8 +49,16 @@ hr {
 }
 
 a {
-  color: inherit;
   text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+div p:only-child {
+  margin-bottom: 0;
 }
 
 * {

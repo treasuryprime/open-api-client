@@ -16,6 +16,7 @@
   padding: 4px 0;
   font-weight: 300;
   border-bottom: 1px solid rgba(0, 0, 0, .05);
+  text-decoration: none;
 }
 
 .link:hover {

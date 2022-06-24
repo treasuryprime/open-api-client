@@ -1,2 +1,2 @@
 ##### Parameters
-{Object.values(props.parameters)?.map(({ name, required, schema }) => <ParameterDoc key={name} components={props.components} name={name} required={required} type={schema.type} />)}
+{Object.values(props.parameters)?.map(({ name, required, schema, description = () => <>Lorem ipsum dolor sit amet</> }) => <ParameterDoc key={name} components={props.components} name={name} description={description()} required={required} type={schema.type} />)}

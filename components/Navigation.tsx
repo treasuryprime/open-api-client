@@ -18,5 +18,5 @@ const NavLink = ({ route, name }: Props) => {
 
 export default () =>
 <div className={styles.container}>
-  {Object.keys(data.paths).map((path) => <NavLink key={path} route={path} name={path} />)}
+  {Object.keys(data.paths).sort().map((path) => <NavLink key={path} route={path} name={path} />)}
 </div>
